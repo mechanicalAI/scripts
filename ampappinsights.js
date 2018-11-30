@@ -5,6 +5,40 @@
 * Attribution: "videojs-ga - v0.4.2" - Copyright (c) 2015 Michael Bensoussan - Licensed MIT
 * https://github.com/Azure-Samples/media-services-javascript-azure-media-player-application-insights-plugin/blob/master/amp-appInsights.js
 */
+var appInsights = window.appInsights || function (config) {
+    function r(config) {
+        t[config] = function () {
+            var i = arguments;
+            t.queue.push(function () {
+                t[config].apply(t, i)
+            })
+        }
+    }
+    var t = {
+        config: config
+    },
+        u = document,
+        e = window,
+        o = "script",
+        s = u.createElement(o),
+        i, f;
+    s.src = config.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js";
+    u.getElementsByTagName(o)[0].parentNode.appendChild(s);
+    try {
+        t.cookie = u.cookie
+    } catch (h) { }
+    for (t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; i.length;) r("track" + i.pop());
+    return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) {
+        var s = f && f(config, r, u, e, o);
+        return s !== !0 && t["_" + i](config, r, u, e, o), s
+    }), t
+}({
+    instrumentationKey: "0e369d69-bd18-480f-98e0-b682cdf9e682",
+    enableDebug: true
+});
+window.appInsights = appInsights;
+appInsights.trackPageView();
+
 
 (function () {
     var __indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
