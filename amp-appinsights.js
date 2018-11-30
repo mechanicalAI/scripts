@@ -9,8 +9,9 @@
 (function () {
     var __indexOf = [].indexOf || function (item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-    amp.plugin('appInsights', function (options) {
+  amp.plugin('appInsights', function () {
         var player = this;
+var options = null;
 
         var pluginVersion = 0.1;
         var parsedOptions;
